@@ -1,0 +1,17 @@
+---
+version: '3.8'
+
+services:
+  ch3-app:
+      build:
+        context: .
+      image: ch3-image
+      container_name: ch3-app
+      ports: 
+      - "30000:3000"
+      volumes:
+      - ./src:/usr/src/app
+      environment:
+        RAILS_ENV: development
+      stdin_open: true # docker run -i
+      tty: true        # docker run -t
