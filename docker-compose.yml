@@ -13,6 +13,6 @@ services:
       - ./src:/usr/src/app
       environment:
         RAILS_ENV: development
-        DATE_BEFORE: '2021-03-01'
+        DATE_FIX: '2021-03-15'
       stdin_open: true # docker run -i
       tty: true        # docker run -t
