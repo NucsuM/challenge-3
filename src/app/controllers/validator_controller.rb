@@ -10,11 +10,16 @@ class ValidatorController < ApplicationController
     lower_date_limit = date_fix - days_limit.days
     upper_date_limit = date_fix + days_limit.days
 
-    puts "Das eingegebene Datum ist nur gültig im Bereich von #{lower_date_limit.strftime("%d.%m.%Y")} "\
-         "bis #{upper_date_limit.strftime("%d.%m.%Y")}." unless 
-         date_inside_range?(lower_date_limit, upper_date_limit, date_to_validate)
+    if date_inside_range?(lower_date_limit, upper_date_limit, date_to_validate)
+      head :no_content, status: :ok
+    else
+      error_message = "Das eingegebene Datum ist nur gültig im Bereich von "\
+                      "#{lower_date_limit.strftime("%d.%m.%Y")} "\
+                      "bis #{upper_date_limit.strftime("%d.%m.%Y")}." 
 
-    head :no_content, status: :ok
+      puts error_message
+      render body: error_message, status: :ok
+    end
   end
 
   private
